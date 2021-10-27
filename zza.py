@@ -67,8 +67,8 @@ def login():
 		token = open("login.txt", "r")
 		menu()
 	except (KeyError, IOError):
-		print(" * SEBELUM MqzaK KE MENU HARUS LOGIN TERLEBIH DAHULU")
-		print(" * UNTUK LOGIN SILAHKAN MqzaKKAN TOKEN FACEBOOK ANDA")
+		print(" * SEBELUM MASUK KE MENU HARUS LOGIN TERLEBIH DAHULU")
+		print(" * UNTUK LOGIN SILAHKAN MASUKKAN TOKEN FACEBOOK ANDA")
 		print(" ? KETIK '\033[0;93mgithub\033[0;97m' UNTUK LIHAT GITHUB SAYA")
 		token = raw_input("\n + TOKEN FB : ")
 		if token == "github":
